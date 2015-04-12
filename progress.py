@@ -14,11 +14,11 @@ class Progress:
         self._total = total
         self._title = title
         self._spinner = itertools.cycle("|/-\\")
-
+        self._baseTime = None
         return
 
     def update(self, count=0, suffix=''):
-        if not count:
+        if not self._baseTime:
             self._baseTime = time.time()
         bar_len = 60
         filled_len = int(round(bar_len * count / float(self._total)))
